@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" styleClass="father" stylesheets="@../resources/styles/PaymentSlipView.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="758.0" layoutY="14.0" mnemonicParsing="false" text="X" />
+      <VBox alignment="CENTER" layoutX="515.0" layoutY="51.0" prefHeight="299.0" prefWidth="257.0" spacing="10.0">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="53.0" prefWidth="204.0" text="Boleta de pagos y trabajadores" textAlignment="CENTER" wrapText="true" />
+            <Label contentDisplay="CENTER" text="Modificaciones:" />
+            <TextField styleClass="textField" />
+            <Label prefHeight="52.0" prefWidth="235.0" text="Observación de las modificaciones del desvengo:" textAlignment="CENTER" wrapText="true" />
+            <TextField styleClass="textField" />
+            <GridPane prefHeight="95.0" prefWidth="308.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="197.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="117.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Generar boleta de pagos" GridPane.halignment="CENTER" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Retorno" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+      <TableView layoutX="20.0" layoutY="44.0" prefHeight="312.0" prefWidth="479.0" styleClass="table">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Nombres" />
+          <TableColumn prefWidth="75.0" text="Apellidos" />
+            <TableColumn prefWidth="114.0" text="Departamento" />
+            <TableColumn prefWidth="56.0" text="Puesto" />
+            <TableColumn prefWidth="154.0" text="Salario Base Mensual" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
