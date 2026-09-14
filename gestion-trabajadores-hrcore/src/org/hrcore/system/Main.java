@@ -4,17 +4,19 @@
  */
 package org.hrcore.system;
 
+import javafx.application.Application;
 /**
  *
  * @author informatica
  */
-public class Main {
+public class Main extends Application{
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        launch(args);
     }
     
 }
