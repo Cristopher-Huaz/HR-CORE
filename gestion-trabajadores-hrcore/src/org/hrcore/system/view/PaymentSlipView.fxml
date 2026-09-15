@@ -18,9 +18,9 @@
          <children>
             <Label contentDisplay="CENTER" prefHeight="53.0" prefWidth="204.0" text="Boleta de pagos y trabajadores" textAlignment="CENTER" wrapText="true" />
             <Label contentDisplay="CENTER" text="Modificaciones:" />
-            <TextField styleClass="textField" />
+            <TextField fx:id="txtModifications" styleClass="textField" />
             <Label prefHeight="52.0" prefWidth="235.0" text="Observación de las modificaciones del desvengo:" textAlignment="CENTER" wrapText="true" />
-            <TextField styleClass="textField" />
+            <TextField fx:id="txtObservations" styleClass="textField" />
             <GridPane prefHeight="95.0" prefWidth="308.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="197.0" />
@@ -30,13 +30,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Generar boleta de pagos" GridPane.halignment="CENTER" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Retorno" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnGenerateSlip" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Generar boleta de pagos" GridPane.halignment="CENTER" />
+                  <Button fx:id="btnReturn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Retorno" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
          </children>
       </VBox>
-      <TableView layoutX="20.0" layoutY="44.0" prefHeight="312.0" prefWidth="479.0" styleClass="table">
+      <TableView fx:id="tblEmployeeEdit" layoutX="20.0" layoutY="44.0" prefHeight="312.0" prefWidth="479.0" styleClass="table">
         <columns>
           <TableColumn prefWidth="75.0" text="Nombres" />
           <TableColumn prefWidth="75.0" text="Apellidos" />

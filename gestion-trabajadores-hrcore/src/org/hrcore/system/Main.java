@@ -5,6 +5,8 @@
 package org.hrcore.system;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
+import org.hrcore.system.utils.SceneManager;
 /**
  *
  * @author informatica
@@ -19,4 +21,8 @@ public class Main extends Application{
         launch(args);
     }
     
+    @Override
+    public void start(Stage stageRoot){
+        SceneManager.getInstanciaSceneManager().setStagePrincipal(stageRoot);
+    }
 }
