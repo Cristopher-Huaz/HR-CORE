@@ -7,6 +7,8 @@ package org.hrcore.system;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.hrcore.system.utils.SceneManager;
+import org.hrcore.system.utils.ViewFactory;
+
 /**
  *
  * @author informatica
@@ -23,6 +25,9 @@ public class Main extends Application{
     
     @Override
     public void start(Stage stageRoot){
+
         SceneManager.getInstanciaSceneManager().setStagePrincipal(stageRoot);
+        ViewFactory viewFactory = new ViewFactory();
+        viewFactory.viewLogin();
     }
 }

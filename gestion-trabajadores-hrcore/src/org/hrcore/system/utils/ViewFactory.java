@@ -4,6 +4,7 @@ package org.hrcore.system.utils;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
+import org.hrcore.system.Main;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -24,7 +25,7 @@ public class ViewFactory {
             //especificar donde esta el archivo
             loaderFXML.setLocation(urlFile);
 
-        return new Scene(loaderFXML.load(), width, height);
+            return new Scene(loaderFXML.load(), width, height);
 
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -35,10 +36,29 @@ public class ViewFactory {
         Scene scene = null;
         try{
             switch (nameFXml){
+                case "EditEmployee" -> scene = loadFileFXML("EditEmployeeView.fxml", 750,500);
+                case "RegistrationEmployee" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 750,500);
                 case "Login" -> scene = loadFileFXML("LoginView.fxml", 750, 500);
-                case "Edit" -> scene = loadFileFXML("EditEmployee", 750,500);
+                case "Payment" -> scene = loadFileFXML("PaymentSlipView.fxml", 750,500);
+                default -> scene = loadFileFXML("LoginView.fxml", 750 , 500);
             }
+            SceneManager.getInstanciaSceneManager().changeScene(scene);
         }
-        catch ()
+        catch (NullPointerException e){
+            //aqui va un alert equipo
+            System.out.println("Load scene");
+        }
+    }
+    public void viewEditEmployee(){
+        loadScene("EditEmployee");
+    }
+    public void viewEmployeeRegistration(){
+        loadScene("RegistrationEmployee");
+    }
+    public void viewLogin(){
+        loadScene("Login");
+    }
+    public void viewPayment(){
+        loadScene("Payment");
     }
 }
