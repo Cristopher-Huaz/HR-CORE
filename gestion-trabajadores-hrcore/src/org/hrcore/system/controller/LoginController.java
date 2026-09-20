@@ -46,7 +46,7 @@ public class LoginController implements Initializable{
         });
         btnClose.setOnMouseClicked(
         e ->{
-            Platform.exit();
+           System.exit(0);
         });
     }
     private void checkLogin() {

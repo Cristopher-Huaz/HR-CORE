@@ -5,7 +5,9 @@
 package org.hrcore.system.utils;
 
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class SceneManager {
     
@@ -19,7 +21,9 @@ public class SceneManager {
     public void changeScene(Scene scene){
         try{
             if(stagePrincipal != null && scene != null) {
+                scene.setFill(Color.TRANSPARENT);
                 stagePrincipal.setScene(scene);
+                stagePrincipal.initStyle(StageStyle.TRANSPARENT);
                 stagePrincipal.sizeToScene(); // Ajusta el tamaño de la ventana al contenido
                 stagePrincipal.show();
             } else {
