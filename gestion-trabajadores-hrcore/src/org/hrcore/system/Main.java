@@ -25,6 +25,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage stageRoot){
+
         SceneManager.getInstanciaSceneManager().setStagePrincipal(stageRoot);
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.viewLogin();

@@ -25,7 +25,7 @@ public class ViewFactory {
             //especificar donde esta el archivogit
             loaderFXML.setLocation(urlFile);
 
-        return new Scene(loaderFXML.load(), width, height);
+            return new Scene(loaderFXML.load(), width, height);
 
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -36,20 +36,35 @@ public class ViewFactory {
         Scene scene = null;
         try{
             switch (nameFXml){
+                case "EditEmployee" -> scene = loadFileFXML("EditEmployeeView.fxml", 750,500);
+                case "RegistrationEmployee" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 750,500);
                 case "Login" -> scene = loadFileFXML("LoginView.fxml", 750, 500);
+
                 case "EditEmployee" -> scene = loadFileFXML("EditEmployeeView.fxml", 750,500);
                 case "EmployeeRegistration" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 750,500);
                 case "PaymentSlipView" -> scene = loadFileFXML("PaymentSlipView.fxml", 750,500);
                 default -> scene = loadFileFXML("LoginView.fxml", 750,500);
+
             }
             SceneManager.getInstanciaSceneManager().changeScene(scene);
         }
         catch (NullPointerException e){
-            //Aqui va un alert equipo
-            System.out.println("load scene");
+
+            //aqui va un alert equipo
+            System.out.println("Load scene");
         }
+    }
+    public void viewEditEmployee(){
+        loadScene("EditEmployee");
+    }
+    public void viewEmployeeRegistration(){
+        loadScene("RegistrationEmployee");
     }
     public void viewLogin(){
         loadScene("Login");
+    }
+    public void viewPayment(){
+        loadScene("Payment");
+
     }
 }
