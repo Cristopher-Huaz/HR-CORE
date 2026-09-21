@@ -9,6 +9,9 @@
       <root url="jar://$PROJECT_DIR$/../../../../../Libraries/javafx-sdk-21/javafx-sdk-21/lib/javafx.swing.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../../Libraries/javafx-sdk-21/javafx-sdk-21/lib/javafx.web.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../../Libraries/javafx-sdk-21/javafx-sdk-21/lib/javafx-swt.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/bcrypt-0.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Libraries/bytes-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Libraries/mysql-connector-j-9.6.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
