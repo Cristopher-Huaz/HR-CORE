@@ -15,18 +15,20 @@ public class ConnectionDB {
     private ConnectionDB(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://"+Enviroment.LOCATION_SERVICE+"/"+Enviroment.DATA_BASE,
-                    Enviroment.USER_KINAL,
-                    Enviroment.PASSWORD_KINAL);
-
-        } catch(ClassNotFoundException classNotFound){
-            System.out.println("Error de clase no encontrada");
-
-        }catch (SQLException sqlException) {
-
-            System.out.println("Error de conexion SQL");
-        }catch(Exception e){
-            System.out.println("Error parde : " + e.getMessage());
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://" + Enviroment.LOCATION_SERVICE + "/" + Enviroment.DATA_BASE,
+                    Enviroment.USER,
+                    Enviroment.PASSWORD);
+            System.out.println(">>> Conexion EXITOSA: " + connection);
+        } catch (ClassNotFoundException classNotFound) {
+            System.out.println(">>> ERROR: No se encontro el driver MySQL");
+            classNotFound.printStackTrace();
+        } catch (SQLException sqlException) {
+            System.out.println(">>> ERROR SQL: " + sqlException.getMessage());
+            sqlException.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(">>> ERROR GENERAL: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

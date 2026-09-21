@@ -12,101 +12,72 @@ public class Person {
     protected int id;
     protected String firstName;
     protected String lastName;
+    protected String username;
     protected double monthlySalary;
     protected String hireDate;
     protected String password;
+    protected int typeEncrypt;         // 1 = plain, 2 = md5, 3 = bcrypt
     protected String department;
     protected String role;
-    
-     public Person() {
+
+    public Person() {
     }
-     
-    public Person(int id, String firstName, String lastName, double monthlySalary, 
-                  String hireDate, String password, String department, String role) {
+
+    public Person(int id, String firstName, String lastName, String username,
+                  double monthlySalary, String hireDate, String password,
+                  int typeEncrypt, String department, String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.monthlySalary = monthlySalary;
         this.hireDate = hireDate;
         this.password = password;
+        this.typeEncrypt = typeEncrypt;
         this.department = department;
         this.role = role;
     }
-    
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public String getLastName() { return lastName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public double getMonthlySalary() { return monthlySalary; }
+    public void setMonthlySalary(double monthlySalary) { this.monthlySalary = monthlySalary; }
 
-    public double getMonthlySalary() {
-        return monthlySalary;
-    }
+    public String getHireDate() { return hireDate; }
+    public void setHireDate(String hireDate) { this.hireDate = hireDate; }
 
-    public void setMonthlySalary(double monthlySalary) {
-        this.monthlySalary = monthlySalary;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public String getHireDate() {
-        return hireDate;
-    }
+    public int getTypeEncrypt() { return typeEncrypt; }
+    public void setTypeEncrypt(int typeEncrypt) { this.typeEncrypt = typeEncrypt; }
 
-    public void setHireDate(String hireDate) {
-        this.hireDate = hireDate;
-    }
+    public String getDepartment() { return department; }
+    public void setDepartment(String department) { this.department = department; }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-    
-    
     public void displayInformation() {
         System.out.println("=== PERSON ===");
         System.out.println("ID: " + id);
         System.out.println("Name: " + firstName + " " + lastName);
+        System.out.println("Username: " + username);
         System.out.println("Department: " + department);
         System.out.println("Role: " + role);
         System.out.println("Hire Date: " + hireDate);
         System.out.println("Monthly Salary: $" + monthlySalary);
+        System.out.println("Type Encrypt: " + typeEncrypt);
         System.out.println("==================");
     }
-    
 }
