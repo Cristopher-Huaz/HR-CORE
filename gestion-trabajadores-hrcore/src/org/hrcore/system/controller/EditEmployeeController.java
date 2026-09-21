@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -17,9 +18,9 @@ import javafx.scene.control.TextField;
  *
  * @author informatica
  */
-public class EditEmployeeController implements Initializable{
-    
-        @FXML
+public class EditEmployeeController implements Initializable {
+
+    @FXML
     private Button btnClose;
 
     @FXML
@@ -48,13 +49,28 @@ public class EditEmployeeController implements Initializable{
 
     @FXML
     private TextField txtNames;
-    
+
+    @FXML
+    private TableColumn<?, ?> clmTableBaseSalary;
+
+    @FXML
+    private TableColumn<?, ?> clmTableDepartment;
+
+    @FXML
+    private TableColumn<?, ?> clmTableLastName;
+
+    @FXML
+    private TableColumn<?, ?> clmTableName;
+
+    @FXML
+    private TableColumn<?, ?> clmTablePosition;
+
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
         buildActions();
     }
-    
-    public void buildActions(){
-        
+
+    public void buildActions() {
+
     }
 }
