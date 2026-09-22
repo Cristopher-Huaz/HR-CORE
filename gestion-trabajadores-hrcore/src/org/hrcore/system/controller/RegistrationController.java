@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.hrcore.system.utils.SceneManager;
+import org.hrcore.system.utils.ViewFactory;
+
 /**
  *
  * @author informatica
@@ -43,15 +46,21 @@ public class RegistrationController implements Initializable {
 
     @FXML
     private TextField txtPosition;
+
+    private ViewFactory viewFactory = new ViewFactory();
     
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL url, ResourceBundle rb) {
         buildActions();
     }
-    
-    public void buildActions(){
-        
+
+    public void buildActions() {
+        btnClose.setOnMouseClicked(e -> {
+            SceneManager.getInstanciaSceneManager().exitApplication();
+        });
+        btnReturn.setOnMouseClicked(e -> {
+            viewFactory.viewMenu();
+        });
     }
 
 }
-

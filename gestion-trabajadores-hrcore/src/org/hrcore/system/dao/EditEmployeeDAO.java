@@ -70,11 +70,105 @@ public class EditEmployeeDAO {
         } catch (SQLException e) {
             System.out.println(
                     ">>> ERROR AL OBTENER EMPLEADOS: "
-                            + e.getMessage()
+                    + e.getMessage()
             );
             e.printStackTrace();
         }
 
         return employees;
     }
+    public boolean updateEmployee(
+        int id,
+        String firstName,
+        String lastName,
+        String username,
+        double salary,
+        String hireDate,
+        String password,
+        int typeEncrypt,
+        String department,
+        String role) {
+
+    String sql = "{CALL update_worker(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+
+    try (PreparedStatement statement =
+                 connection.prepareCall(sql)) {
+
+        int departmentId = getDepartmentId(department);
+        int roleId = getRoleId(role);
+
+        if (departmentId == -1 || roleId == -1) {
+            System.out.println(
+                    ">>> ERROR: Departamento o puesto no encontrado."
+            );
+            return false;
+        }
+
+        statement.setInt(1, id);
+        statement.setString(2, firstName);
+        statement.setString(3, lastName);
+        statement.setString(4, username);
+        statement.setDouble(5, salary);
+        statement.setString(6, hireDate);
+        statement.setString(7, password);
+        statement.setInt(8, departmentId);
+        statement.setInt(9, roleId);
+        statement.setInt(10, typeEncrypt);
+
+        statement.executeUpdate();
+
+        return true;
+
+    } catch (SQLException e) {
+        System.out.println(
+                ">>> ERROR AL ACTUALIZAR EMPLEADO: "
+                + e.getMessage()
+        );
+        e.printStackTrace();
+        return false;
+    }
+}
+    private int getDepartmentId(String department) {
+
+    String sql = "SELECT id FROM Department WHERE name = ?";
+
+    try (PreparedStatement statement =
+                 connection.prepareStatement(sql)) {
+
+        statement.setString(1, department);
+
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            return result.getInt("id");
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return -1;
+}
+    private int getRoleId(String role) {
+
+    String sql = "SELECT id FROM `role` WHERE role_type = ?";
+
+    try (PreparedStatement statement =
+                 connection.prepareStatement(sql)) {
+
+        statement.setString(1, role);
+
+        ResultSet result = statement.executeQuery();
+
+        if (result.next()) {
+            return result.getInt("id");
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return -1;
+}
+
 }

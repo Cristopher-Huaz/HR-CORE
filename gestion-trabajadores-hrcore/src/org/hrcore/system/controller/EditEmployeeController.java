@@ -77,16 +77,27 @@ public class EditEmployeeController implements Initializable {
 
     private EditEmployeeDAO employeeDAO = new EditEmployeeDAO();
 
+
+    private Person selectedEmployee;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadEmployees();
         configureTable();
+        loadEmployees();
+        selectEmployee();
         buildActions();
     }
 
     public void buildActions() {
         btnClose.setOnMouseClicked(e -> {
-            System.exit(0);
+            SceneManager.getInstanciaSceneManager().exitApplication();
+        });
+        btnReturn.setOnMouseClicked(e -> {
+            viewFactory.viewMenu();
+        });
+        btnSaveChanges.setOnMouseClicked(e -> {
+            saveChanges();
+         
         });
         btnReturn.setOnMouseClicked(e -> {
             viewFactory.viewDashboard();
@@ -116,6 +127,53 @@ public class EditEmployeeController implements Initializable {
         );
     }
 
+    @FXML
+    private void saveChanges() {
+
+        if (selectedEmployee == null) {
+            System.out.println(">>> No hay ningún empleado seleccionado.");
+            return;
+        }
+
+        try {
+
+            double salary = Double.parseDouble(
+                    txtEditBaseSalary.getText().trim()
+            );
+
+            boolean updated = employeeDAO.updateEmployee(
+                    selectedEmployee.getId(),
+                    txtNames.getText().trim(),
+                    txtLastNames.getText().trim(),
+                    selectedEmployee.getUsername(),
+                    salary,
+                    selectedEmployee.getHireDate(),
+                    pwdEditUser.getText(),
+                    selectedEmployee.getTypeEncrypt(),
+                    txtEditDepartment.getText().trim(),
+                    txtEditPosition.getText().trim()
+            );
+
+            if (updated) {
+
+                System.out.println(
+                        ">>> Empleado actualizado correctamente."
+                );
+
+                loadEmployees();
+
+                selectedEmployee = null;
+
+            }
+
+        } catch (NumberFormatException e) {
+
+            System.out.println(
+                    ">>> ERROR: El salario debe ser numérico."
+            );
+        }
+    }
+
     private void loadEmployees() {
 
         tblEmployee.setItems(
@@ -124,8 +182,26 @@ public class EditEmployeeController implements Initializable {
                 )
         );
     }
+
+    private void selectEmployee() {
+
+        tblEmployee.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+
+                    if (newValue != null) {
+
+                        selectedEmployee = newValue;
+
+                        txtNames.setText(newValue.getFirstName());
+                        txtLastNames.setText(newValue.getLastName());
+                        txtEditPosition.setText(newValue.getRole());
+                        txtEditDepartment.setText(newValue.getDepartment());
+                        txtEditBaseSalary.setText(
+                                String.valueOf(newValue.getMonthlySalary())
+                        );
+
+                        pwdEditUser.setText(newValue.getPassword());
+                    }
+                });
+    }
 }
-
-
-
-

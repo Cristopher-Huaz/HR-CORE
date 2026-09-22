@@ -18,13 +18,16 @@ public class LoginController implements Initializable {
     @FXML private TextField txtUsername;
     @FXML private PasswordField txtPassword;
 
+
     private AuthenticationService authService = new AuthenticationService();
     private ViewFactory viewFactory = new ViewFactory();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // vacío
+        buildAccions();
     }
+
+    public void buildAccions() {}
 
     @FXML
     private void onLogin(ActionEvent event) {
@@ -32,6 +35,7 @@ public class LoginController implements Initializable {
         String password = txtPassword.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
+
             AlertInformation.showAlert(
                     "warning",
                     "Ingresa tu usuario y contraseña",
@@ -45,7 +49,9 @@ public class LoginController implements Initializable {
         switch (status) {
             case LOGIN_SUCCESS:
                 System.out.println(">>> LOGIN EXITOSO, llamando a viewDashboard");
+                viewFactory.viewMenu();   // 👈 navegacion
                 viewFactory.viewDashboard();
+
                 break;
 
             case ERROR_USER_NOT_FOUND:
@@ -80,7 +86,12 @@ public class LoginController implements Initializable {
     }
 
     @FXML
+
+    private void onRegisterUser(ActionEvent event) {
+        viewFactory.viewMenu();
+
     private void onClose(ActionEvent event) {
         System.exit(0);
+
     }
 }

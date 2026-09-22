@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import org.hrcore.system.utils.SceneManager;
+import org.hrcore.system.utils.ViewFactory;
 
 /**
  *
@@ -21,6 +23,9 @@ public class PaymentSlipController implements Initializable {
 
     @FXML
     private Button btnGenerateSlip;
+
+    @FXML
+    private Button btnClose;
 
     @FXML
     private Button btnReturn;
@@ -49,12 +54,19 @@ public class PaymentSlipController implements Initializable {
     @FXML
     private TableColumn<?, ?> clmPaymentPosition;
 
+    private ViewFactory viewFactory = new ViewFactory();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buildActions();
     }
 
     public void buildActions() {
-
+        btnClose.setOnMouseClicked(e -> {
+            SceneManager.getInstanciaSceneManager().exitApplication();
+        });
+        btnReturn.setOnMouseClicked(e -> {
+            viewFactory.viewMenu();
+        });
     }
 }

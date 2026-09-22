@@ -1,5 +1,6 @@
 package org.hrcore.system.controller;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,8 +11,8 @@ import javafx.application.Platform;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
 
+public class MenuController implements Initializable {
     @FXML private Button btnClose;
     @FXML private Button btnGoManage;
     @FXML private Button btnGoRegister;
@@ -53,6 +54,7 @@ public class MenuController implements Initializable {
 
     }
 
+
     private void applyRolePermissions() {
 
         boolean esDirector      = SessionController.isDirector();
@@ -81,3 +83,4 @@ public class MenuController implements Initializable {
         btnClose.setManaged(true);
     }
 }
+
