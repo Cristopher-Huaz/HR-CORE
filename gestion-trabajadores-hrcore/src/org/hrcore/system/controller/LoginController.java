@@ -21,8 +21,7 @@ public class LoginController implements Initializable {
     private AuthenticationService authService = new AuthenticationService();
     private ViewFactory viewFactory = new ViewFactory();
 
-    @FXML
-    private Button btnLogin;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
