@@ -12,11 +12,14 @@ import org.hrcore.system.utils.ViewFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.Button;
 
 public class LoginController implements Initializable {
 
-    @FXML private TextField txtUsername;
-    @FXML private PasswordField txtPassword;
+    @FXML
+    private TextField txtUsername;
+    @FXML
+    private PasswordField txtPassword;
     private AlertInformation alert = new AlertInformation();
     private AuthenticationService authService = new AuthenticationService();
     private ViewFactory viewFactory = new ViewFactory();
@@ -28,7 +31,8 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         buildAccions();
     }
-    public void buildAccions(){
+
+    public void buildAccions() {
 
     }
 

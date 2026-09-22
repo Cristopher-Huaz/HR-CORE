@@ -38,6 +38,14 @@ public class ViewFactory {
                 case "PaymentSlipView" -> scene = loadFileFXML("PaymentSlipView.fxml", 800,400);
                 case "Menu" -> scene = loadFileFXML("MenuView.fxml", 650, 400);
                 default -> scene = loadFileFXML("LoginView.fxml", 600,400);
+               }
+            SceneManager.getInstanciaSceneManager().changeScene(scene);
+        } catch (NullPointerException e) {
+            //alert
+            System.out.println("Load scene");
+        }
+    }
+        
 
 
     public void viewLogin() {
