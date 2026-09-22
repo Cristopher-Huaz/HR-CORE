@@ -54,7 +54,7 @@ public class ViewFactory {
     }
 
     public void viewDashboard() {
-        loadScene("Dashboard");
+        loadScene("Menu");
     }
 
     public void viewEditEmployee() {

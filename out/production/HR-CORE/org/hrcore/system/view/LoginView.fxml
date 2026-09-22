@@ -26,6 +26,7 @@
                 <Label text="Ingresa tu contraseña" />
                 <PasswordField fx:id="txtPassword" styleClass="textfield" />
                 <Button fx:id="btnLogin" mnemonicParsing="false" text="Login" onAction="#onLogin" />
+
             </children>
             <opaqueInsets>
                 <Insets />

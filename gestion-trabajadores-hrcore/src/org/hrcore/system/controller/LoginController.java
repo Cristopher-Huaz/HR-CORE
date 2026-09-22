@@ -44,6 +44,7 @@ public class LoginController implements Initializable {
 
         switch (status) {
             case LOGIN_SUCCESS:
+                System.out.println(">>> LOGIN EXITOSO, llamando a viewDashboard");
                 viewFactory.viewDashboard();
                 break;
 

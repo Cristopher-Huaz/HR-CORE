@@ -1,11 +1,12 @@
 package org.hrcore.system.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import org.hrcore.system.utils.AlertInformation;
 import org.hrcore.system.utils.ViewFactory;
-
+import javafx.application.Platform;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,69 +23,58 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println(">>> MENU CONTROLLER INICIALIZADO");
         buildActions();
         applyRolePermissions();
     }
 
-    /**
-     * Asigna las acciones a cada boton usando lambdas.
-     */
+
     public void buildActions() {
 
-        btnGoManage.setOnAction(e -> viewFactory.viewEditEmployee());
+        btnGoManage.setOnAction((ActionEvent e) -> viewFactory.viewEditEmployee());
 
-        btnGoRegister.setOnAction(e -> viewFactory.viewEmployeeRegistration());
+        btnGoRegister.setOnAction((ActionEvent e) -> viewFactory.viewEmployeeRegistration());
 
-        btnGoRegisterNewUser.setOnAction(e ->
+        btnGoRegisterNewUser.setOnAction((ActionEvent e) ->
                 AlertInformation.showAlert("info", "Pendiente de implementar", "Registrar usuario")
         );
 
-        btnGoPayment.setOnAction(e -> viewFactory.viewPayment());
+        btnGoPayment.setOnAction((ActionEvent e) -> viewFactory.viewPayment());
 
-        btnLogOut.setOnAction(e -> {
+        btnLogOut.setOnAction((ActionEvent e) -> {
             SessionController.clear();
             viewFactory.viewLogin();
         });
 
-        btnClose.setOnAction(e -> {
-            SessionController.clear();
-            viewFactory.viewLogin();
+        btnClose.setOnAction((ActionEvent e) -> {
+            Platform.exit();
+            System.exit(0);
         });
+
     }
 
-    /**
-     * Segun el rol, muestra u oculta los botones del menu.
-     *  - Director:           TODOS los botones
-     *  - Gestor de Talento:  Gestionar + Registrar empleados
-     *  - Analista:           Solo Boletas
-     */
     private void applyRolePermissions() {
 
         boolean esDirector      = SessionController.isDirector();
         boolean esGestorTalento = SessionController.isGestorTalento();
         boolean esAnalista      = SessionController.isAnalista();
 
-        // ---- btnGoRegisterNewUser: solo Director ----
         boolean verNuevoUsuario = esDirector;
         btnGoRegisterNewUser.setVisible(verNuevoUsuario);
         btnGoRegisterNewUser.setManaged(verNuevoUsuario);
 
-        // ---- btnGoManage: Director + Gestor de Talento ----
         boolean verGestionar = esDirector || esGestorTalento;
         btnGoManage.setVisible(verGestionar);
         btnGoManage.setManaged(verGestionar);
 
-        // ---- btnGoRegister: Director + Gestor de Talento ----
         boolean verRegistrar = esDirector || esGestorTalento;
         btnGoRegister.setVisible(verRegistrar);
         btnGoRegister.setManaged(verRegistrar);
 
-        // ---- btnGoPayment: Director + Analista ----
         boolean verBoletas = esDirector || esAnalista;
         btnGoPayment.setVisible(verBoletas);
         btnGoPayment.setManaged(verBoletas);
 
-        // ---- btnLogOut y btnClose: siempre visibles ----
         btnLogOut.setVisible(true);
         btnLogOut.setManaged(true);
         btnClose.setVisible(true);
