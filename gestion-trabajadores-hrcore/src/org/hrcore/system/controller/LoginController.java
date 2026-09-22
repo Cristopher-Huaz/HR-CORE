@@ -23,7 +23,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // vacio por ahora
+        // vacío
     }
 
     @FXML
@@ -48,48 +48,38 @@ public class LoginController implements Initializable {
                 break;
 
             case ERROR_USER_NOT_FOUND:
-                AlertInformation.showAlert(
-                        "error",
+                AlertInformation.showAlert("error",
                         "El usuario ingresado no existe",
-                        "Usuario no encontrado"
-                );
+                        "Usuario no encontrado");
                 break;
 
             case ERROR_CREDENTIALS:
-                AlertInformation.showAlert(
-                        "error",
+                AlertInformation.showAlert("error",
                         "El usuario o la contraseña no coinciden",
-                        "Credenciales incorrectas"
-                );
+                        "Credenciales incorrectas");
                 break;
 
             case ERROR_USER_SEARCH:
-                AlertInformation.showAlert(
-                        "error",
+                AlertInformation.showAlert("error",
                         "No se pudo verificar el usuario en la base de datos",
-                        "Error de búsqueda"
-                );
+                        "Error de búsqueda");
                 break;
 
             case ERROR_LOGIN:
-                AlertInformation.showAlert(
-                        "error",
+                AlertInformation.showAlert("error",
                         authService.getMessageError(),
-                        "Error al iniciar sesión"
-                );
+                        "Error al iniciar sesión");
                 break;
 
             default:
-                AlertInformation.showAlert(
-                        "error",
+                AlertInformation.showAlert("error",
                         "No se pudo iniciar sesión",
-                        "Error desconocido"
-                );
+                        "Error desconocido");
         }
     }
 
     @FXML
-    private void onRegisterUser(ActionEvent event) {
-        viewFactory.viewEmployeeRegistration();
+    private void onClose(ActionEvent event) {
+        System.exit(0);
     }
 }
