@@ -48,8 +48,8 @@
             <PasswordField fx:id="pwdEditUser" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
-      <Button layoutX="862.0" layoutY="14.0" mnemonicParsing="false" text="X" />
-      <TableView layoutX="14.0" layoutY="51.0" prefHeight="348.0" prefWidth="476.0" styleClass="table">
+      <Button fx:id="btnClose" layoutX="862.0" layoutY="14.0" mnemonicParsing="false" text="X" />
+      <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="51.0" prefHeight="348.0" prefWidth="476.0" styleClass="table">
          <columns>
             <TableColumn prefWidth="75.0" text="Nombres" />
             <TableColumn prefWidth="75.0" text="Apellidos" />

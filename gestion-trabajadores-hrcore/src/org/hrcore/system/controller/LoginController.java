@@ -1,60 +1,74 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.hrcore.system.controller;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import org.hrcore.system.service.AuthenticationService;
+import org.hrcore.system.service.AuthenticationStatus;
+import org.hrcore.system.utils.AlertInformation;
+import org.hrcore.system.utils.ViewFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 
-/**
- *
- * @author informatica
- */
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
 
-    @FXML
-    private Button btnClose;
+    @FXML private TextField txtUsername;
+    @FXML private PasswordField txtPassword;
+    private AlertInformation alert = new AlertInformation();
+    private AuthenticationService authService = new AuthenticationService();
+    private ViewFactory viewFactory = new ViewFactory();
 
     @FXML
     private Button btnLogin;
 
-    @FXML
-    private PasswordField pwdUser;
-
-    @FXML
-    private TextField txtUser;
-
-//    private AlertInformation  alert = new AlertInformation();
-//    private ChangeView view = new ChangeView();
-//    private AuthenticationService authenticationService = new AlertInformation();
     @Override
-    public void initialize(URL url, ResourceBundle rb){
-        buildActions();
+    public void initialize(URL url, ResourceBundle rb) {
+        buildAccions();
     }
-    
-    public void  buildActions(){
-        btnLogin.setOnMouseClicked(
-        e ->{
-            checkLogin();
-        });
-        btnClose.setOnMouseClicked(
-        e ->{
-           System.exit(0);
-        });
-    }
-    private void checkLogin() {
-        String username = txtUser.getText().trim();
-        String password = pwdUser.getText().trim();
+    public void buildAccions(){
 
-//        if (username.isEmpty() || password.isEmpty()) {
-//            alert.mostrarAlertaWithImage("warning", "No deje campos vacios", "Error de Campo", "gumi.gif");
-//            return;
-    } 
+    }
+
+    @FXML
+    private void onLogin(ActionEvent event) {
+        String username = txtUsername.getText().trim();
+        String password = txtPassword.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            alert.showAlert("Campos vacíos", "Ingresa usuario y contraseña", "WARN");
+            return;
+        }
+
+        AuthenticationStatus status = authService.userLogin(username, password);
+
+        switch (status) {
+            case LOGIN_SUCCESS:
+                viewFactory.viewDashboard();   // 👈 navegación
+                break;
+
+            case ERROR_USER_NOT_FOUND:
+                alert.showAlert("Usuario no encontrado", "El usuario no existe", "ERROR");
+                break;
+
+            case ERROR_CREDENTIALS:
+                alert.showAlert("Credenciales incorrectas", "Verifica tus datos", "ERROR");
+                break;
+
+            case ERROR_USER_SEARCH:
+            case ERROR_LOGIN:
+                alert.showAlert("Error del sistema", authService.getMessageError(), "ERROR");
+                break;
+
+            default:
+                alert.showAlert("Error", "No se pudo iniciar sesión", "ERROR");
+        }
+    }
+
+    @FXML
+    private void onRegisterUser(ActionEvent event) {
+        viewFactory.viewEmployeeRegistration();
+    }
 }
