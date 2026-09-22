@@ -40,6 +40,7 @@ public class ViewFactory {
                 default -> scene = loadFileFXML("LoginView.fxml", 600,400);
 
 
+
     public void viewLogin() {
         loadScene("Login");
     }
