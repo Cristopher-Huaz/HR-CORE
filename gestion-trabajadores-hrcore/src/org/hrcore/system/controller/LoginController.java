@@ -43,7 +43,6 @@ public class LoginController implements Initializable {
 
         if (username.isEmpty() || password.isEmpty()) {
             alert.showAlert("Campos vacíos", "Ingresa usuario y contraseña", "WARN");
-            return;
         }
 
         AuthenticationStatus status = authService.userLogin(username, password);
