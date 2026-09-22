@@ -33,8 +33,8 @@
             <Label contentDisplay="CENTER" text="Registro de trabajadores" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" />
             <Label prefHeight="42.0" prefWidth="219.0" text="Edita los nombres del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
             <Label prefHeight="42.0" prefWidth="225.0" text="Edita los apellidos del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
-            <Label prefHeight="42.0" prefWidth="219.0" text="Edita el departamento al que pertenece el trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
-            <Label text="Edita el puesto que tiene el trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
+            <Label prefHeight="42.0" prefWidth="219.0" text="Edita el departamento del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
+            <Label text="Edita el puesto del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
             <Label text="Edita el salario base del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="5" />
             <TextField fx:id="txtNames" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="txtLastNames" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
