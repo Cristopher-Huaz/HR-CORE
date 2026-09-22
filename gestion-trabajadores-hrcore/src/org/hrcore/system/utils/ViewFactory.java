@@ -47,12 +47,14 @@ public class ViewFactory {
         
 
 
+
     public void viewLogin() {
         loadScene("Login");
     }
 
-    public void viewMenu() {
-        loadScene("Menuu");
+    public void viewDashboard() {
+        loadScene("Menu");
+
     }
 
     public void viewEditEmployee() {

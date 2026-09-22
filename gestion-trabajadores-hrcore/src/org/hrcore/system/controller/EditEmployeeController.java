@@ -77,6 +77,7 @@ public class EditEmployeeController implements Initializable {
 
     private EditEmployeeDAO employeeDAO = new EditEmployeeDAO();
 
+
     private Person selectedEmployee;
 
     @Override
@@ -96,6 +97,10 @@ public class EditEmployeeController implements Initializable {
         });
         btnSaveChanges.setOnMouseClicked(e -> {
             saveChanges();
+         
+        });
+        btnReturn.setOnMouseClicked(e -> {
+            viewFactory.viewDashboard();
         });
     }
 

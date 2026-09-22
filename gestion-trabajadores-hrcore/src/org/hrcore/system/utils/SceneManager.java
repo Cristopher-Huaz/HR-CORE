@@ -17,14 +17,16 @@ public class SceneManager {
     private SceneManager() {
         
     }
+
     
     public void changeScene(Scene scene) {
         try {
             if (stagePrincipal != null && scene != null) {
+
                 scene.setFill(Color.TRANSPARENT);
                 stagePrincipal.setScene(scene);
-                stagePrincipal.initStyle(StageStyle.TRANSPARENT);
-                stagePrincipal.sizeToScene(); // Ajusta el tamaño de la ventana al contenido
+                // stagePrincipal.initStyle(StageStyle.TRANSPARENT);  // 👈 ELIMINA ESTA LÍNEA
+                stagePrincipal.sizeToScene();
                 stagePrincipal.show();
             } else {
                 System.out.println("Error: La ventana principal o la escena son nulas.");

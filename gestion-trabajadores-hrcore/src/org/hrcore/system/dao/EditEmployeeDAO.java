@@ -77,7 +77,6 @@ public class EditEmployeeDAO {
 
         return employees;
     }
-    
     public boolean updateEmployee(
         int id,
         String firstName,
@@ -171,4 +170,5 @@ public class EditEmployeeDAO {
 
     return -1;
 }
+
 }

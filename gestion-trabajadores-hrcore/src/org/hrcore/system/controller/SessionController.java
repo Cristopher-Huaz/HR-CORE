@@ -22,39 +22,37 @@ public class SessionController {
         return userLogued != null ? userLogued.getRole() : null;
     }
 
-    public static boolean isAdmin() {
-        return "Administrador".equalsIgnoreCase(getRoleName());
+    // -------------------- Roles del sistema --------------------
+
+    public static boolean isDirector() {
+        return "Director".equalsIgnoreCase(getRoleName());
     }
 
-    public static boolean isManager() {
-        return "Gerente".equalsIgnoreCase(getRoleName());
+    public static boolean isGestorTalento() {
+        String rol = getRoleName();
+        if (rol == null) return false;
+        return rol.equalsIgnoreCase("Gestor de Talento")
+                || rol.equalsIgnoreCase("Gestor de talento");
     }
 
-    public static boolean isSupervisor() {
-        return "Supervisor".equalsIgnoreCase(getRoleName());
-    }
-
-    public static boolean isEmployee() {
-        return "Empleado".equalsIgnoreCase(getRoleName());
-    }
-
-    public static boolean isAnalyst() {
+    public static boolean isAnalista() {
         return "Analista".equalsIgnoreCase(getRoleName());
     }
 
-    public static boolean canManageUsers() {
-        return isAdmin() || isManager();
+    // -------------------- Permisos por botón --------------------
+
+    /** Director ve TODOS los botones del dashboard. */
+    public static boolean canSeeAll() {
+        return isDirector();
     }
 
-    public static boolean canViewAllUsers() {
-        return isAdmin() || isManager() || isSupervisor();
+    /** Gestor de Talento solo ve Registrar y Editar colaborador. */
+    public static boolean canManageEmployees() {
+        return isGestorTalento();
     }
 
+    /** Analista solo ve Boletas de pago. */
     public static boolean canViewPaymentSlips() {
-        return true;
-    }
-
-    public static boolean canManageDepartments() {
-        return isAdmin() || isManager();
+        return isAnalista();
     }
 }

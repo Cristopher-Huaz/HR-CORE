@@ -11,30 +11,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="father" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.hrcore.system.controller.LoginController">
-   <children>
-      <VBox alignment="CENTER" layoutX="51.0" prefHeight="400.0" prefWidth="249.0" spacing="10.0">
-         <children>
-            <Label contentDisplay="TOP" text="Bienvenido al Login" />
-            <Label text="Ingresa tu usuario" />
-            <TextField fx:id="txtUser" prefHeight="20.0" prefWidth="283.0" />
-            <Label text="Ingresa tu contraseña" />
-            <PasswordField fx:id="pwdUser" styleClass="textfield" />
-            <Button fx:id="btnLogin" mnemonicParsing="false" text="Login" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
-      <ImageView fitHeight="400.0" fitWidth="275.0" layoutX="333.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../resources/images/Login.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="btnClose" layoutX="558.0" layoutY="14.0" mnemonicParsing="false" text="X" />
-   </children>
-   <stylesheets>
-      <URL value="@../resoruces/LoginView.css" />
-      <URL value="@../resources/styles/LoginView.css" />
-   </stylesheets>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0"
+            styleClass="father"
+            xmlns="http://javafx.com/javafx/21.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.hrcore.system.controller.LoginController">
+    <children>
+        <VBox alignment="CENTER" layoutX="51.0" prefHeight="400.0" prefWidth="249.0" spacing="10.0">
+            <children>
+                <Label contentDisplay="TOP" text="Bienvenido al Login" />
+                <Label text="Ingresa tu usuario" />
+                <TextField fx:id="txtUsername" prefHeight="20.0" prefWidth="283.0" />
+                <Label text="Ingresa tu contraseña" />
+                <PasswordField fx:id="txtPassword" styleClass="textfield" />
+                <Button fx:id="btnLogin" mnemonicParsing="false" text="Login" onAction="#onLogin" />
+
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </VBox>
+        <ImageView fitHeight="400.0" fitWidth="275.0" layoutX="333.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../resources/images/Login.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="btnClose" layoutX="558.0" layoutY="14.0" mnemonicParsing="false" text="X" onAction="#onClose" />
+    </children>
+    <stylesheets>
+        <URL value="@../resources/styles/LoginView.css" />
+    </stylesheets>
 </AnchorPane>
