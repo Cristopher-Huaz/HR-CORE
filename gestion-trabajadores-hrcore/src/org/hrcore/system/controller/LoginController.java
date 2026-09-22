@@ -12,6 +12,7 @@ import org.hrcore.system.utils.ViewFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.Button;
 
 public class LoginController implements Initializable {
 
