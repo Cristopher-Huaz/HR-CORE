@@ -4,7 +4,11 @@
  */
 package org.hrcore.system.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -12,4 +16,27 @@ import javafx.fxml.Initializable;
  */
 public class MenuController implements Initializable {
     
+    @FXML
+    private Button btnClose;
+
+    @FXML
+    private Button btnGoManage;
+
+    @FXML
+    private Button btnGoRegister;
+
+    @FXML
+    private Button btnGoRegisterNewUser;
+
+    @FXML
+    private Button btnLogOut;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        buildActions();
+    }
+    
+    public void buildActions(){
+        
+    }
 }
