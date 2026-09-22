@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" styleClass="father" stylesheets="@../resources/styles/EditEmployeeView.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="900.0" styleClass="father" stylesheets="@../resources/styles/EditEmployeeView.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.hrcore.system.controller.EditEmployeeController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="498.0" layoutY="27.0" prefHeight="438.0" prefWidth="376.0">
          <columnConstraints>
@@ -33,7 +33,7 @@
             <Label contentDisplay="CENTER" text="Registro de trabajadores" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" />
             <Label prefHeight="42.0" prefWidth="219.0" text="Edita los nombres del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
             <Label prefHeight="42.0" prefWidth="225.0" text="Edita los apellidos del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
-            <Label prefHeight="42.0" prefWidth="219.0" text="Edita el departamento al que pertenece trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
+            <Label prefHeight="42.0" prefWidth="219.0" text="Edita el departamento al que pertenece el trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
             <Label text="Edita el puesto que tiene el trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
             <Label text="Edita el salario base del trabajador:" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="5" />
             <TextField fx:id="txtNames" styleClass="textField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -51,11 +51,11 @@
       <Button fx:id="btnClose" layoutX="862.0" layoutY="14.0" mnemonicParsing="false" text="X" />
       <TableView fx:id="tblEmployee" layoutX="14.0" layoutY="51.0" prefHeight="348.0" prefWidth="476.0" styleClass="table">
          <columns>
-            <TableColumn prefWidth="75.0" text="Nombres" />
-            <TableColumn prefWidth="75.0" text="Apellidos" />
-            <TableColumn prefWidth="114.0" text="Departamento" />
-            <TableColumn prefWidth="56.0" text="Puesto" />
-            <TableColumn prefWidth="154.0" text="Salario Base Mensual" />
+            <TableColumn fx:id="clmTableName" prefWidth="75.0" text="Nombres" />
+            <TableColumn fx:id="clmTableLastName" prefWidth="75.0" text="Apellidos" />
+            <TableColumn fx:id="clmTableDepartment" prefWidth="114.0" text="Departamento" />
+            <TableColumn fx:id="clmTablePosition" prefWidth="56.0" text="Puesto" />
+            <TableColumn fx:id="clmTableBaseSalary" prefWidth="154.0" text="Salario Base Mensual" />
          </columns>
       </TableView>
    </children>

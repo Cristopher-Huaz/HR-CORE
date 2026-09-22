@@ -28,18 +28,18 @@ public class ViewFactory {
 
     public void loadScene(String nameFXml) {
         Scene scene = null;
-        switch (nameFXml) {
-            case "Login"                -> scene = loadFileFXML("LoginView.fxml", 750, 500);
-            case "Dashboard"            -> scene = loadFileFXML("MenuView.fxml", 900, 600);
-            case "EditEmployee"         -> scene = loadFileFXML("EditEmployeeView.fxml", 750, 500);
-            case "EmployeeRegistration" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 750, 500);
-            case "Payment"              -> scene = loadFileFXML("PaymentSlipView.fxml", 750, 500);
-            default                     -> scene = loadFileFXML("LoginView.fxml", 750, 500);
-        }
-        SceneManager.getInstanciaSceneManager().changeScene(scene);
-    }
 
-    // -------------------- Métodos de conveniencia --------------------
+        try{
+            switch (nameFXml){
+                case "EditEmployee" -> scene = loadFileFXML("EditEmployeeView.fxml", 900,450);
+                case "RegistrationEmployee" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 600,400);
+                case "Login" -> scene = loadFileFXML("LoginView.fxml", 750, 500);
+                case "EmployeeRegistration" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 750,500);
+                case "PaymentSlipView" -> scene = loadFileFXML("PaymentSlipView.fxml", 800,400);
+                case "Menu" -> scene = loadFileFXML("MenuView.fxml", 650, 400);
+                default -> scene = loadFileFXML("LoginView.fxml", 600,400);
+
+
 
     public void viewLogin() {
         loadScene("Login");
