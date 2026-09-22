@@ -13,6 +13,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import org.hrcore.system.model.Person;
+import org.hrcore.system.utils.SceneManager;
+import org.hrcore.system.utils.ViewFactory;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.FXCollections;
+import javafx.scene.control.cell.PropertyValueFactory;
+import org.hrcore.system.dao.EditEmployeeDAO;
 
 /**
  *
@@ -33,7 +41,7 @@ public class EditEmployeeController implements Initializable {
     private PasswordField pwdEditUser;
 
     @FXML
-    private TableView<?> tblEmployee;
+    private TableView<Person> tblEmployee;
 
     @FXML
     private TextField txtEditBaseSalary;
@@ -51,26 +59,73 @@ public class EditEmployeeController implements Initializable {
     private TextField txtNames;
 
     @FXML
-    private TableColumn<?, ?> clmTableBaseSalary;
+    private TableColumn<Person, String> clmTableName;
 
     @FXML
-    private TableColumn<?, ?> clmTableDepartment;
+    private TableColumn<Person, String> clmTableLastName;
 
     @FXML
-    private TableColumn<?, ?> clmTableLastName;
+    private TableColumn<Person, String> clmTablePosition;
 
     @FXML
-    private TableColumn<?, ?> clmTableName;
+    private TableColumn<Person, String> clmTableDepartment;
 
     @FXML
-    private TableColumn<?, ?> clmTablePosition;
+    private TableColumn<Person, Double> clmTableBaseSalary;
+
+    private ViewFactory viewFactory = new ViewFactory();
+
+    private EditEmployeeDAO employeeDAO = new EditEmployeeDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        loadEmployees();
+        configureTable();
         buildActions();
     }
 
     public void buildActions() {
+        btnClose.setOnMouseClicked(e -> {
+            System.exit(0);
+        });
+        btnReturn.setOnMouseClicked(e -> {
+            viewFactory.viewDashboard();
+        });
+    }
 
+    private void configureTable() {
+
+        clmTableName.setCellValueFactory(
+                new PropertyValueFactory<>("firstName")
+        );
+
+        clmTableLastName.setCellValueFactory(
+                new PropertyValueFactory<>("lastName")
+        );
+
+        clmTablePosition.setCellValueFactory(
+                new PropertyValueFactory<>("role")
+        );
+
+        clmTableDepartment.setCellValueFactory(
+                new PropertyValueFactory<>("department")
+        );
+
+        clmTableBaseSalary.setCellValueFactory(
+                new PropertyValueFactory<>("monthlySalary")
+        );
+    }
+
+    private void loadEmployees() {
+
+        tblEmployee.setItems(
+                FXCollections.observableArrayList(
+                        employeeDAO.getAllEmployees()
+                )
+        );
     }
 }
+
+
+
+
