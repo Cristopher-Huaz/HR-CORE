@@ -45,5 +45,5 @@ public class ConnectionDB {
         if(instanciaConnectionDB == null)
             instanciaConnectionDB = new ConnectionDB();
         return instanciaConnectionDB;
-    }
+    } 
 }

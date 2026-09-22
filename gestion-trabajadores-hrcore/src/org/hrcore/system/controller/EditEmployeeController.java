@@ -45,7 +45,7 @@ public class EditEmployeeController implements Initializable {
 
     @FXML
     private TextField txtEditBaseSalary;
-    
+
     @FXML
     private TextField txtEditDepartment;
 
@@ -57,7 +57,7 @@ public class EditEmployeeController implements Initializable {
 
     @FXML
     private TextField txtNames;
-    
+
     @FXML
     private TableColumn<Person, String> clmTableName;
 
@@ -74,13 +74,16 @@ public class EditEmployeeController implements Initializable {
     private TableColumn<Person, Double> clmTableBaseSalary;
 
     private ViewFactory viewFactory = new ViewFactory();
-    
+
     private EditEmployeeDAO employeeDAO = new EditEmployeeDAO();
+
+    private Person selectedEmployee;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadEmployees();
         configureTable();
+        loadEmployees();
+        selectEmployee();
         buildActions();
     }
 
@@ -91,37 +94,109 @@ public class EditEmployeeController implements Initializable {
         btnReturn.setOnMouseClicked(e -> {
             viewFactory.viewMenu();
         });
+        btnSaveChanges.setOnMouseClicked(e -> {
+            saveChanges();
+        });
     }
-    
- private void configureTable() {
 
-    clmTableName.setCellValueFactory(
-            new PropertyValueFactory<>("firstName")
-    );
+    private void configureTable() {
 
-    clmTableLastName.setCellValueFactory(
-            new PropertyValueFactory<>("lastName")
-    );
+        clmTableName.setCellValueFactory(
+                new PropertyValueFactory<>("firstName")
+        );
 
-    clmTablePosition.setCellValueFactory(
-            new PropertyValueFactory<>("role")
-    );
+        clmTableLastName.setCellValueFactory(
+                new PropertyValueFactory<>("lastName")
+        );
 
-    clmTableDepartment.setCellValueFactory(
-            new PropertyValueFactory<>("department")
-    );
+        clmTablePosition.setCellValueFactory(
+                new PropertyValueFactory<>("role")
+        );
 
-    clmTableBaseSalary.setCellValueFactory(
-            new PropertyValueFactory<>("monthlySalary")
-    );
-}
- 
- private void loadEmployees() {
+        clmTableDepartment.setCellValueFactory(
+                new PropertyValueFactory<>("department")
+        );
 
-    tblEmployee.setItems(
-            FXCollections.observableArrayList(
-                    employeeDAO.getAllEmployees()
-            )
-    );
-}
+        clmTableBaseSalary.setCellValueFactory(
+                new PropertyValueFactory<>("monthlySalary")
+        );
+    }
+
+    @FXML
+    private void saveChanges() {
+
+        if (selectedEmployee == null) {
+            System.out.println(">>> No hay ningún empleado seleccionado.");
+            return;
+        }
+
+        try {
+
+            double salary = Double.parseDouble(
+                    txtEditBaseSalary.getText().trim()
+            );
+
+            boolean updated = employeeDAO.updateEmployee(
+                    selectedEmployee.getId(),
+                    txtNames.getText().trim(),
+                    txtLastNames.getText().trim(),
+                    selectedEmployee.getUsername(),
+                    salary,
+                    selectedEmployee.getHireDate(),
+                    pwdEditUser.getText(),
+                    selectedEmployee.getTypeEncrypt(),
+                    txtEditDepartment.getText().trim(),
+                    txtEditPosition.getText().trim()
+            );
+
+            if (updated) {
+
+                System.out.println(
+                        ">>> Empleado actualizado correctamente."
+                );
+
+                loadEmployees();
+
+                selectedEmployee = null;
+
+            }
+
+        } catch (NumberFormatException e) {
+
+            System.out.println(
+                    ">>> ERROR: El salario debe ser numérico."
+            );
+        }
+    }
+
+    private void loadEmployees() {
+
+        tblEmployee.setItems(
+                FXCollections.observableArrayList(
+                        employeeDAO.getAllEmployees()
+                )
+        );
+    }
+
+    private void selectEmployee() {
+
+        tblEmployee.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+
+                    if (newValue != null) {
+
+                        selectedEmployee = newValue;
+
+                        txtNames.setText(newValue.getFirstName());
+                        txtLastNames.setText(newValue.getLastName());
+                        txtEditPosition.setText(newValue.getRole());
+                        txtEditDepartment.setText(newValue.getDepartment());
+                        txtEditBaseSalary.setText(
+                                String.valueOf(newValue.getMonthlySalary())
+                        );
+
+                        pwdEditUser.setText(newValue.getPassword());
+                    }
+                });
+    }
 }

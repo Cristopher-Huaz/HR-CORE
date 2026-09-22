@@ -13,11 +13,16 @@ import org.hrcore.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
+import org.hrcore.system.utils.SceneManager;
 
 public class LoginController implements Initializable {
 
     @FXML
     private TextField txtUsername;
+    
+    @FXML
+    private Button btnClose;
+    
     @FXML
     private PasswordField txtPassword;
     private AlertInformation alert = new AlertInformation();
@@ -33,7 +38,9 @@ public class LoginController implements Initializable {
     }
 
     public void buildAccions() {
-
+        btnClose.setOnMouseClicked(e -> {
+            SceneManager.getInstanciaSceneManager().exitApplication();
+        });
     }
 
     @FXML
@@ -43,13 +50,14 @@ public class LoginController implements Initializable {
 
         if (username.isEmpty() || password.isEmpty()) {
             alert.showAlert("Campos vacíos", "Ingresa usuario y contraseña", "WARN");
+            return;
         }
 
         AuthenticationStatus status = authService.userLogin(username, password);
 
         switch (status) {
             case LOGIN_SUCCESS:
-                viewFactory.viewDashboard();   // 👈 navegación
+                viewFactory.viewMenu();   // 👈 navegación
                 break;
 
             case ERROR_USER_NOT_FOUND:
@@ -72,6 +80,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private void onRegisterUser(ActionEvent event) {
-        viewFactory.viewEmployeeRegistration();
+        viewFactory.viewMenu();
     }
 }

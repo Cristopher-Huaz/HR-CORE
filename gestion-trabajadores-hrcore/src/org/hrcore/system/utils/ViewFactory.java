@@ -32,9 +32,8 @@ public class ViewFactory {
         try{
             switch (nameFXml){
                 case "EditEmployee" -> scene = loadFileFXML("EditEmployeeView.fxml", 900,450);
-                case "RegistrationEmployee" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 600,400);
                 case "Login" -> scene = loadFileFXML("LoginView.fxml", 600, 400);
-                case "EmployeeRegistration" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 750,500);
+                case "EmployeeRegistration" -> scene = loadFileFXML("EmployeeRegistratonView.fxml", 600,400);
                 case "PaymentSlipView" -> scene = loadFileFXML("PaymentSlipView.fxml", 800,400);
                 case "Menu" -> scene = loadFileFXML("MenuView.fxml", 650, 400);
                 default -> scene = loadFileFXML("LoginView.fxml", 600,400);
@@ -52,8 +51,8 @@ public class ViewFactory {
         loadScene("Login");
     }
 
-    public void viewDashboard() {
-        loadScene("Dashboard");
+    public void viewMenu() {
+        loadScene("Menuu");
     }
 
     public void viewEditEmployee() {
