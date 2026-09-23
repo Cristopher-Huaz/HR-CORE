@@ -99,5 +99,3 @@ public class PaymentSlipDAO {
         return employees;
     }
 }
-
-
