@@ -14,17 +14,19 @@ public class SceneManager {
     private static SceneManager instanciaSceneManager;
     private Stage stagePrincipal;
     
-    private SceneManager(){
+    private SceneManager() {
         
     }
+
     
-    public void changeScene(Scene scene){
-        try{
-            if(stagePrincipal != null && scene != null) {
+    public void changeScene(Scene scene) {
+        try {
+            if (stagePrincipal != null && scene != null) {
+
                 scene.setFill(Color.TRANSPARENT);
                 stagePrincipal.setScene(scene);
-                stagePrincipal.initStyle(StageStyle.TRANSPARENT);
-                stagePrincipal.sizeToScene(); // Ajusta el tamaño de la ventana al contenido
+                // stagePrincipal.initStyle(StageStyle.TRANSPARENT);  // 👈 ELIMINA ESTA LÍNEA
+                stagePrincipal.sizeToScene();
                 stagePrincipal.show();
             } else {
                 System.out.println("Error: La ventana principal o la escena son nulas.");
@@ -38,13 +40,17 @@ public class SceneManager {
         }
     }
     
-        public static SceneManager getInstanciaSceneManager() {
+    public void exitApplication() {
+        System.exit(0);
+    }
+    
+    public static SceneManager getInstanciaSceneManager() {
         if (instanciaSceneManager == null) {
             instanciaSceneManager = new SceneManager();
         }
         return instanciaSceneManager;
     }
-    
+
     // Getters y Setters para la ventana principal
     public Stage getStagePrincipal() {
         return stagePrincipal;
@@ -54,4 +60,3 @@ public class SceneManager {
         this.stagePrincipal = stagePrincipal;
     }
 }
-

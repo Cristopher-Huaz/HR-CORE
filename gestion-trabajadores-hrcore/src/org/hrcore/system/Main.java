@@ -6,6 +6,7 @@ package org.hrcore.system;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.hrcore.system.utils.SceneManager;
 import org.hrcore.system.utils.ViewFactory;
 
@@ -24,9 +25,10 @@ public class Main extends Application{
     }
 
     @Override
-    public void start(Stage stageRoot){
+    public void start(Stage primaryStage) {
+        SceneManager.getInstanciaSceneManager().setStagePrincipal(primaryStage);
 
-        SceneManager.getInstanciaSceneManager().setStagePrincipal(stageRoot);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.viewLogin();
     }

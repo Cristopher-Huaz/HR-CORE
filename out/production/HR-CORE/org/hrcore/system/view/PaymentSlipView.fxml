@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" styleClass="father" stylesheets="@../resources/styles/PaymentSlipView.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" styleClass="father" stylesheets="@../resources/styles/PaymentSlipView.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.hrcore.system.controller.PaymentSlipController">
    <children>
-      <Button layoutX="758.0" layoutY="14.0" mnemonicParsing="false" text="X" />
+      <Button fx:id="btnClose" layoutX="758.0" layoutY="14.0" mnemonicParsing="false" text="X" />
       <VBox alignment="CENTER" layoutX="515.0" layoutY="51.0" prefHeight="299.0" prefWidth="257.0" spacing="10.0">
          <children>
             <Label contentDisplay="CENTER" prefHeight="53.0" prefWidth="204.0" text="Boleta de pagos y trabajadores" textAlignment="CENTER" wrapText="true" />
@@ -38,11 +38,11 @@
       </VBox>
       <TableView fx:id="tblEmployeeEdit" layoutX="20.0" layoutY="44.0" prefHeight="312.0" prefWidth="479.0" styleClass="table">
         <columns>
-          <TableColumn prefWidth="75.0" text="Nombres" />
-          <TableColumn prefWidth="75.0" text="Apellidos" />
-            <TableColumn prefWidth="114.0" text="Departamento" />
-            <TableColumn prefWidth="56.0" text="Puesto" />
-            <TableColumn prefWidth="154.0" text="Salario Base Mensual" />
+          <TableColumn fx:id="clmPaymentName" prefWidth="75.0" text="Nombres" />
+          <TableColumn fx:id="clmPaymentLastName" prefWidth="75.0" text="Apellidos" />
+            <TableColumn fx:id="clmPaymentDepartment" prefWidth="114.0" text="Departamento" />
+            <TableColumn fx:id="clmPaymentPosition" prefWidth="56.0" text="Puesto" />
+            <TableColumn fx:id="clmPaymentBaseSalary" prefWidth="154.0" text="Salario Base Mensual" />
         </columns>
       </TableView>
    </children>

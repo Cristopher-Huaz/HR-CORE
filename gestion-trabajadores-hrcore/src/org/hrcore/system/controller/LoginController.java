@@ -17,20 +17,17 @@ public class LoginController implements Initializable {
 
     @FXML private TextField txtUsername;
     @FXML private PasswordField txtPassword;
-    private AlertInformation alert = new AlertInformation();
+
+
     private AuthenticationService authService = new AuthenticationService();
     private ViewFactory viewFactory = new ViewFactory();
-
-    @FXML
-    private Button btnLogin;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buildAccions();
     }
-    public void buildAccions(){
 
-    }
+    public void buildAccions() {}
 
     @FXML
     private void onLogin(ActionEvent event) {
@@ -38,7 +35,12 @@ public class LoginController implements Initializable {
         String password = txtPassword.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            alert.showAlert("Campos vacíos", "Ingresa usuario y contraseña", "WARN");
+
+            AlertInformation.showAlert(
+                    "warning",
+                    "Ingresa tu usuario y contraseña",
+                    "Campos vacíos"
+            );
             return;
         }
 
@@ -46,29 +48,48 @@ public class LoginController implements Initializable {
 
         switch (status) {
             case LOGIN_SUCCESS:
-                viewFactory.viewDashboard();   // 👈 navegación
+                System.out.println(">>> LOGIN EXITOSO, llamando a viewDashboard");
+                viewFactory.viewDashboard();
                 break;
 
             case ERROR_USER_NOT_FOUND:
-                alert.showAlert("Usuario no encontrado", "El usuario no existe", "ERROR");
+                AlertInformation.showAlert("error",
+                        "El usuario ingresado no existe",
+                        "Usuario no encontrado");
                 break;
 
             case ERROR_CREDENTIALS:
-                alert.showAlert("Credenciales incorrectas", "Verifica tus datos", "ERROR");
+                AlertInformation.showAlert("error",
+                        "El usuario o la contraseña no coinciden",
+                        "Credenciales incorrectas");
                 break;
 
             case ERROR_USER_SEARCH:
+                AlertInformation.showAlert("error",
+                        "No se pudo verificar el usuario en la base de datos",
+                        "Error de búsqueda");
+                break;
+
             case ERROR_LOGIN:
-                alert.showAlert("Error del sistema", authService.getMessageError(), "ERROR");
+                AlertInformation.showAlert("error",
+                        authService.getMessageError(),
+                        "Error al iniciar sesión");
                 break;
 
             default:
-                alert.showAlert("Error", "No se pudo iniciar sesión", "ERROR");
+                AlertInformation.showAlert("error",
+                        "No se pudo iniciar sesión",
+                        "Error desconocido");
         }
     }
 
     @FXML
+
     private void onRegisterUser(ActionEvent event) {
-        viewFactory.viewEmployeeRegistration();
+        viewFactory.viewDashboard();}
+
+    @FXML
+    private void onClose(ActionEvent event) {
+        System.exit(0);
     }
 }
