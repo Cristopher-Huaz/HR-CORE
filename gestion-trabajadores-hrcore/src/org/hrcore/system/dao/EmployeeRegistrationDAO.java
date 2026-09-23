@@ -100,13 +100,13 @@ public class EmployeeRegistrationDAO {
         String sql =  "SELECT id FROM `role` WHERE role_type = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
+            
             statement.setString(1, role);
             ResultSet result = statement.executeQuery();
 
-            if (result.next())
+            if (result.next()) 
                 return result.getInt("id");
-
+            
 
         } catch (SQLException e) {
 

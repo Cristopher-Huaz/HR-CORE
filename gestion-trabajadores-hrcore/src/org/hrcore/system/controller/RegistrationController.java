@@ -74,6 +74,100 @@ public class RegistrationController implements Initializable {
 
             registerEmployee();
         });
+
+        btnEmployeeRegistration.setOnMouseClicked(e -> {
+
+            registerEmployee();
+        });
+    }
+
+    private void registerEmployee() {
+
+        String firstName
+                = txtNames.getText().trim();
+
+        String lastName
+                = txtLastNames.getText().trim();
+
+        String department
+                = txtDepartment.getText().trim();
+
+        String role
+                = txtPosition.getText().trim();
+
+        String password
+                = pwdUser.getText().trim();
+
+        String salaryText
+                = txtBaseSalary.getText().trim();
+
+        // Validar campos vacíos
+        if (firstName.isEmpty()
+                || lastName.isEmpty()
+                || department.isEmpty()
+                || role.isEmpty()
+                || password.isEmpty()
+                || salaryText.isEmpty()) {
+
+            System.out.println(">>> ERROR: Todos los campos son obligatorios."
+            );
+
+            return;
+        }
+
+        double salary;
+
+        try {
+
+            salary = Double.parseDouble(salaryText);
+
+        } catch (NumberFormatException e) {
+
+            System.out.println(">>> ERROR: El salario debe ser numérico.");
+
+            return;
+        }
+
+        /*
+         * Generar username automáticamente.
+         *
+         * Ejemplo:
+         * Juan Pérez
+         * ->
+         * juan.perez
+         */
+        String username
+                = generateUsername(firstName, lastName);
+
+        // Fecha actual
+        String hireDate
+                = LocalDate.now().toString();
+
+        // Verificar si el username ya existe
+        if (employeeRegistrationDAO.existsUsername(username)) {
+
+            System.out.println(">>> ERROR: El usuario " + username + " ya existe.");
+            return;
+        }
+
+        boolean registered
+                = employeeRegistrationDAO.registerEmployee(
+                        firstName,
+                        lastName,
+                        username,
+                        salary,
+                        hireDate,
+                        password,
+                        department,
+                        role
+                );
+
+        if (registered) {
+
+            System.out.println(">>> EMPLEADO REGISTRADO CORRECTAMENTE");
+            System.out.println(">>> Usuario generado: " + username);
+            clearFields();
+        }
     }
 
     private void registerEmployee() {
@@ -164,6 +258,7 @@ public class RegistrationController implements Initializable {
             clearFields();
         }
     }
+
 
     private String generateUsername(
             String firstName,
