@@ -93,7 +93,7 @@ public class EditEmployeeController implements Initializable {
             SceneManager.getInstanciaSceneManager().exitApplication();
         });
         btnReturn.setOnMouseClicked(e -> {
-            viewFactory.viewMenu();
+            viewFactory.viewDashboard();
         });
         btnSaveChanges.setOnMouseClicked(e -> {
             saveChanges();

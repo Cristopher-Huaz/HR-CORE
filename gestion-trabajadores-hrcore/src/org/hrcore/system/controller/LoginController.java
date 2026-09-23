@@ -49,9 +49,7 @@ public class LoginController implements Initializable {
         switch (status) {
             case LOGIN_SUCCESS:
                 System.out.println(">>> LOGIN EXITOSO, llamando a viewDashboard");
-                viewFactory.viewMenu();   // 👈 navegacion
                 viewFactory.viewDashboard();
-
                 break;
 
             case ERROR_USER_NOT_FOUND:
@@ -88,10 +86,10 @@ public class LoginController implements Initializable {
     @FXML
 
     private void onRegisterUser(ActionEvent event) {
-        viewFactory.viewMenu();
+        viewFactory.viewDashboard();}
 
+    @FXML
     private void onClose(ActionEvent event) {
         System.exit(0);
-
     }
 }

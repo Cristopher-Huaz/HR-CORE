@@ -1,18 +1,17 @@
 package org.hrcore.system.controller;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import org.hrcore.system.utils.AlertInformation;
 import org.hrcore.system.utils.ViewFactory;
-import javafx.application.Platform;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 public class MenuController implements Initializable {
+
     @FXML private Button btnClose;
     @FXML private Button btnGoManage;
     @FXML private Button btnGoRegister;
@@ -24,11 +23,9 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(">>> MENU CONTROLLER INICIALIZADO");
         buildActions();
         applyRolePermissions();
     }
-
 
     public void buildActions() {
 
@@ -48,12 +45,10 @@ public class MenuController implements Initializable {
         });
 
         btnClose.setOnAction((ActionEvent e) -> {
-            Platform.exit();
-            System.exit(0);
+            SessionController.clear();
+            viewFactory.viewLogin();
         });
-
     }
-
 
     private void applyRolePermissions() {
 
@@ -83,4 +78,3 @@ public class MenuController implements Initializable {
         btnClose.setManaged(true);
     }
 }
-
