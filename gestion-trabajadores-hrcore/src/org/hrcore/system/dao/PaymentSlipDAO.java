@@ -86,12 +86,13 @@ public class PaymentSlipDAO {
                 employees.add(person);
             }
 
-            
+
         } catch (SQLException e) {
 
             System.out.println(
                     ">>> ERROR AL OBTENER EMPLEADOS: "
                     + e.getMessage()
+
             );
 
             e.printStackTrace();
@@ -99,6 +100,7 @@ public class PaymentSlipDAO {
 
         return employees;
     }
+
     
    public boolean updateSalary(int employeeId, double modification) {
 
@@ -131,3 +133,4 @@ public class PaymentSlipDAO {
     }
 }
 }
+

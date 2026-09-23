@@ -106,7 +106,7 @@ public class PaymentSlipController implements Initializable {
         });
 
         btnReturn.setOnMouseClicked(e -> {
-            viewFactory.viewMenu();
+            viewFactory.viewDashboard();
         });
         btnGenerateSlip.setOnMouseClicked(e -> {
             generatePaymentSlip();

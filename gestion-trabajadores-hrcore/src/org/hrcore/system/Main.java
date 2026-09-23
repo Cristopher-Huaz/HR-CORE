@@ -28,9 +28,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         SceneManager.getInstanciaSceneManager().setStagePrincipal(primaryStage);
 
-        // Configurar el estilo UNA sola vez, antes de mostrar
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-
         ViewFactory viewFactory = new ViewFactory();
         viewFactory.viewLogin();
     }
