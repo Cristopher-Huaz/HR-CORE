@@ -100,7 +100,7 @@ public class PaymentSlipDAO {
         return employees;
     }
     
-    public boolean updateSalary(int employeeId, double modification) {
+   public boolean updateSalary(int employeeId, double modification) {
 
     String sql = "UPDATE workers "
                + "SET monthly_salary = monthly_salary + ? "

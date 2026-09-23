@@ -115,43 +115,66 @@ public class PaymentSlipController implements Initializable {
 
     private void generatePaymentSlip() {
 
-        Person selectedEmployee = tblEmployeeEdit.getSelectionModel().getSelectedItem();
+    Person selectedEmployee =
+            tblEmployeeEdit.getSelectionModel().getSelectedItem();
 
-        if (selectedEmployee == null) {
-            System.out.println("Debe seleccionar un empleado.");
-            return;
-        }
+    if (selectedEmployee == null) {
 
-        String modificationText = txtModifications.getText().trim();
+        System.out.println(
+                "Debe seleccionar un empleado."
+        );
 
-        if (modificationText.isEmpty()) {
-            System.out.println("Debe ingresar una modificación.");
-            return;
-        }
-
-        try {
-
-            double modification = Double.parseDouble(modificationText);
-
-            boolean updated = paymentSlipDAO.updateSalary(selectedEmployee.getId(),modification);
-
-            if (updated) {
-
-                System.out.println("Salario actualizado correctamente.");
-
-                loadEmployees();
-
-                txtModifications.clear();
-                txtObservations.clear();
-
-            } else {
-
-                System.out.println("No se pudo actualizar el salario.");
-            }
-
-        } catch (NumberFormatException e) {
-
-            System.out.println("La modificación debe ser un número válido.");
-        }
+        return;
     }
+
+    String modificationText =
+            txtModifications.getText().trim();
+
+    if (modificationText.isEmpty()) {
+
+        System.out.println(
+                "Debe ingresar una modificación."
+        );
+
+        return;
+    }
+
+    try {
+
+        double modification =
+                Double.parseDouble(modificationText);
+
+        boolean updated =
+                paymentSlipDAO.updateSalary(
+                        selectedEmployee.getId(),
+                        modification
+                );
+
+        if (updated) {
+
+            System.out.println(
+                    "Salario actualizado correctamente."
+            );
+
+            // Recarga los datos directamente desde la BD
+            loadEmployees();
+
+            // Limpia los campos
+            txtModifications.clear();
+            txtObservations.clear();
+
+        } else {
+
+            System.out.println(
+                    "No se pudo actualizar el salario."
+            );
+        }
+
+    } catch (NumberFormatException e) {
+
+        System.out.println(
+                "La modificación debe ser un número válido."
+        );
+    }
+}
 }
