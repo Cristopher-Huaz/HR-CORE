@@ -63,6 +63,6 @@ public class ViewFactory {
     }
 
     public void viewPayment() {
-        loadScene("Payment");
+        loadScene("PaymentSlipView");
     }
 }
