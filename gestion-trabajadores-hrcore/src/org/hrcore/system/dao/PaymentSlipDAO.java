@@ -86,6 +86,7 @@ public class PaymentSlipDAO {
                 employees.add(person);
             }
 
+            
         } catch (SQLException e) {
 
             System.out.println(
@@ -98,4 +99,35 @@ public class PaymentSlipDAO {
 
         return employees;
     }
+    
+    public boolean updateSalary(int employeeId, double modification) {
+
+    String sql = "UPDATE workers "
+               + "SET monthly_salary = monthly_salary + ? "
+               + "WHERE id = ?";
+
+    try (
+        PreparedStatement statement =
+                connection.prepareStatement(sql)
+    ) {
+
+        statement.setDouble(1, modification);
+        statement.setInt(2, employeeId);
+
+        int rowsAffected = statement.executeUpdate();
+
+        return rowsAffected > 0;
+
+    } catch (SQLException e) {
+
+        System.out.println(
+                ">>> ERROR AL ACTUALIZAR SALARIO: "
+                + e.getMessage()
+        );
+
+        e.printStackTrace();
+
+        return false;
+    }
+}
 }

@@ -108,5 +108,50 @@ public class PaymentSlipController implements Initializable {
         btnReturn.setOnMouseClicked(e -> {
             viewFactory.viewMenu();
         });
+        btnGenerateSlip.setOnMouseClicked(e -> {
+            generatePaymentSlip();
+        });
+    }
+
+    private void generatePaymentSlip() {
+
+        Person selectedEmployee = tblEmployeeEdit.getSelectionModel().getSelectedItem();
+
+        if (selectedEmployee == null) {
+            System.out.println("Debe seleccionar un empleado.");
+            return;
+        }
+
+        String modificationText = txtModifications.getText().trim();
+
+        if (modificationText.isEmpty()) {
+            System.out.println("Debe ingresar una modificación.");
+            return;
+        }
+
+        try {
+
+            double modification = Double.parseDouble(modificationText);
+
+            boolean updated = paymentSlipDAO.updateSalary(selectedEmployee.getId(),modification);
+
+            if (updated) {
+
+                System.out.println("Salario actualizado correctamente.");
+
+                loadEmployees();
+
+                txtModifications.clear();
+                txtObservations.clear();
+
+            } else {
+
+                System.out.println("No se pudo actualizar el salario.");
+            }
+
+        } catch (NumberFormatException e) {
+
+            System.out.println("La modificación debe ser un número válido.");
+        }
     }
 }
