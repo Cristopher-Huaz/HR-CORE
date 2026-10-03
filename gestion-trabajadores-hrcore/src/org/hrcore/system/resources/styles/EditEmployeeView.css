@@ -1,0 +1,156 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 9 sept 2026, 08:00:50
+    Author     : informatica
+*/
+
+/* =========================
+   FONDO PRINCIPAL
+   ========================= */
+
+.father {
+    -fx-background-color: linear-gradient(
+        to bottom right,
+        #F8EEEE 0%,
+        #E8D1D1 55%,
+        #B97878 100%
+    );
+
+    -fx-border-color: #8F3F3F;
+    -fx-border-width: 4px;
+    -fx-border-radius: 5px;
+}
+
+
+/* =========================
+   LABEL
+   ========================= */
+
+.label {
+    -fx-text-fill: #4A2424;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================
+   TEXTFIELD
+   ========================= */
+
+.textField {
+    -fx-background-color: #FFF9F9;
+    -fx-text-fill: #4A2424;
+
+    -fx-border-color: #C28A8A;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+
+    -fx-padding: 6px;
+}
+
+
+/* TEXTFIELD ENFOCADO */
+
+.textField:focused {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #A64B4B;
+    -fx-border-width: 2px;
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+.button {
+    -fx-background-color: #702F2F;
+    -fx-text-fill: white;
+
+    -fx-border-color: #A64B4B;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #8F3F3F;
+    -fx-text-fill: white;
+}
+
+.button:pressed {
+    -fx-background-color: #4A2020;
+    -fx-border-color: #C98282;
+}
+
+
+/* =========================
+   TABLE VIEW
+   ========================= */
+
+.table {
+    -fx-background-color: linear-gradient(
+        to bottom right,
+        #FFF9F9 0%,
+        #F1E2E2 55%,
+        #D8BABA 100%
+    );
+
+    -fx-border-color: #C28A8A;
+    -fx-border-width: 2px;
+}
+
+
+/* =========================
+   ENCABEZADO
+   ========================= */
+
+.table .column-header-background {
+    -fx-background-color: #703333;
+}
+
+.table .column-header {
+    -fx-background-color: #703333;
+    -fx-border-color: #994D4D;
+}
+
+.table .column-header .label {
+    -fx-text-fill: #FFF9F9;
+    -fx-font-weight: bold;
+}
+
+
+/* =========================
+   FILAS
+   ========================= */
+
+.table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4A2424;
+    -fx-border-color: #E5D3D3;
+}
+
+.table .table-row-cell:filled:hover {
+    -fx-background-color: #EBD4D4;
+}
+
+.table .table-row-cell:selected {
+    -fx-background-color: #C28A8A;
+    -fx-text-fill: #3D1E1E;
+}
+
+
+/* =========================
+   CELDAS
+   ========================= */
+
+.table .table-cell {
+    -fx-text-fill: #4A2424;
+    -fx-border-color: #E5D3D3;
+}

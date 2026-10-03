@@ -1,0 +1,171 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package org.hrcore.system.controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import org.hrcore.system.dao.PaymentSlipDAO;
+import org.hrcore.system.model.Person;
+import org.hrcore.system.utils.SceneManager;
+import org.hrcore.system.utils.ViewFactory;
+
+public class PaymentSlipController implements Initializable {
+
+    @FXML
+    private Button btnGenerateSlip;
+
+    @FXML
+    private Button btnClose;
+
+    @FXML
+    private Button btnReturn;
+
+    @FXML
+    private TableView<Person> tblEmployeeEdit;
+
+    @FXML
+    private TextField txtModifications;
+
+    @FXML
+    private TextField txtObservations;
+
+    @FXML
+    private TableColumn<Person, Double> clmPaymentBaseSalary;
+
+    @FXML
+    private TableColumn<Person, String> clmPaymentDepartment;
+
+    @FXML
+    private TableColumn<Person, String> clmPaymentLastName;
+
+    @FXML
+    private TableColumn<Person, String> clmPaymentName;
+
+    @FXML
+    private TableColumn<Person, String> clmPaymentPosition;
+
+    private ViewFactory viewFactory = new ViewFactory();
+
+    private PaymentSlipDAO paymentSlipDAO = new PaymentSlipDAO();
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        configureTable();
+        loadEmployees();
+        buildActions();
+    }
+
+    private void configureTable() {
+
+        clmPaymentName.setCellValueFactory(
+                new PropertyValueFactory<>("firstName")
+        );
+
+        clmPaymentLastName.setCellValueFactory(
+                new PropertyValueFactory<>("lastName")
+        );
+
+        clmPaymentPosition.setCellValueFactory(
+                new PropertyValueFactory<>("role")
+        );
+
+        clmPaymentDepartment.setCellValueFactory(
+                new PropertyValueFactory<>("department")
+        );
+
+        clmPaymentBaseSalary.setCellValueFactory(
+                new PropertyValueFactory<>("monthlySalary")
+        );
+    }
+
+    private void loadEmployees() {
+
+        tblEmployeeEdit.setItems(
+                FXCollections.observableArrayList(
+                        paymentSlipDAO.getAllEmployees()
+                )
+        );
+    }
+
+    public void buildActions() {
+
+        btnClose.setOnMouseClicked(e -> {
+            SceneManager.getInstanciaSceneManager().exitApplication();
+        });
+
+        btnReturn.setOnMouseClicked(e -> {
+            viewFactory.viewDashboard();
+        });
+        btnGenerateSlip.setOnMouseClicked(e -> {
+            generatePaymentSlip();
+        });
+    }
+
+    private void generatePaymentSlip() {
+
+        Person selectedEmployee =
+                tblEmployeeEdit.getSelectionModel().getSelectedItem();
+
+        if (selectedEmployee == null) {
+            System.out.println("Debe seleccionar un empleado.");
+            return;
+        }
+
+        String modificationText = txtModifications.getText().trim();
+        String observationText = txtObservations.getText().trim();
+
+        if (modificationText.isEmpty()) {
+            System.out.println("Debe ingresar una modificación.");
+            return;
+        }
+
+        if (observationText.isEmpty()) {
+            System.out.println("Debe ingresar una observación de la modificación.");
+            return;
+        }
+
+        try {
+
+            double modification = Double.parseDouble(modificationText);
+
+            // Llamamos al nuevo método que actualiza el sueldo y guarda la observación
+            boolean updated = paymentSlipDAO.updateSalaryWithObservation(
+                    selectedEmployee.getId(),
+                    modification,
+                    observationText
+            );
+
+            if (updated) {
+
+                System.out.println("Salario actualizado y observación guardada correctamente.");
+
+                // Recarga los datos directamente desde la BD
+                loadEmployees();
+
+                // Limpia los campos
+                txtModifications.clear();
+                txtObservations.clear();
+
+            } else {
+
+                System.out.println("No se pudo actualizar el salario.");
+            }
+
+        } catch (NumberFormatException e) {
+
+            System.out.println("La modificación debe ser un número válido.");
+        }
+    }
+}
