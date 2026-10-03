@@ -34,8 +34,8 @@ public class MenuController implements Initializable {
         btnGoRegister.setOnAction((ActionEvent e) -> viewFactory.viewEmployeeRegistration());
 
         btnGoRegisterNewUser.setOnAction((ActionEvent e) ->
-                AlertInformation.showAlert("info", "Pendiente de implementar", "Registrar usuario")
-        );
+                viewFactory.viewEmployeeRegistration());
+
 
         btnGoPayment.setOnAction((ActionEvent e) -> viewFactory.viewPayment());
 

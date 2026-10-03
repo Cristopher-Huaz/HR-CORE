@@ -4,6 +4,7 @@
  */
 package org.hrcore.system.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,13 +18,11 @@ import org.hrcore.system.model.Person;
  *
  * @author informatica
  */
-
 public class PaymentSlipDAO {
 
     private Connection connection;
 
     public PaymentSlipDAO() {
-
         connection = ConnectionDB
                 .getInstanciaConexionDB()
                 .getConnection();
@@ -36,11 +35,11 @@ public class PaymentSlipDAO {
         String sql = "{CALL query_workers()}";
 
         try (
-            PreparedStatement statement =
-                    connection.prepareStatement(sql);
+                PreparedStatement statement =
+                        connection.prepareStatement(sql);
 
-            ResultSet result =
-                    statement.executeQuery()
+                ResultSet result =
+                        statement.executeQuery()
         ) {
 
             while (result.next()) {
@@ -91,7 +90,7 @@ public class PaymentSlipDAO {
 
             System.out.println(
                     ">>> ERROR AL OBTENER EMPLEADOS: "
-                    + e.getMessage()
+                            + e.getMessage()
 
             );
 
@@ -101,36 +100,43 @@ public class PaymentSlipDAO {
         return employees;
     }
 
-    
-   public boolean updateSalary(int employeeId, double modification) {
+    /**
+     * Actualiza el sueldo de un empleado y guarda la observación
+     * en la tabla salary_observations.
+     *
+     * @param employeeId ID del empleado
+     * @param newSalary  Nuevo sueldo que se le asignará
+     * @param observation Texto con la razón del descuento o modificación
+     * @return true si se actualizó correctamente, false en caso contrario
+     */
+    public boolean updateSalaryWithObservation(int employeeId, double newSalary, String observation) {
 
-    String sql = "UPDATE workers "
-               + "SET monthly_salary = monthly_salary + ? "
-               + "WHERE id = ?";
+        // Llamamos al procedimiento almacenado que creamos en la base de datos
+        String sql = "{CALL update_salary_with_observation(?, ?, ?)}";
 
-    try (
-        PreparedStatement statement =
-                connection.prepareStatement(sql)
-    ) {
+        try (
+                CallableStatement statement =
+                        connection.prepareCall(sql)
+        ) {
 
-        statement.setDouble(1, modification);
-        statement.setInt(2, employeeId);
+            statement.setInt(1, employeeId);
+            statement.setDouble(2, newSalary);
+            statement.setString(3, observation);
 
-        int rowsAffected = statement.executeUpdate();
+            statement.execute();
 
-        return rowsAffected > 0;
+            return true;
 
-    } catch (SQLException e) {
+        } catch (SQLException e) {
 
-        System.out.println(
-                ">>> ERROR AL ACTUALIZAR SALARIO: "
-                + e.getMessage()
-        );
+            System.out.println(
+                    ">>> ERROR AL ACTUALIZAR SALARIO CON OBSERVACIÓN: "
+                            + e.getMessage()
+            );
 
-        e.printStackTrace();
+            e.printStackTrace();
 
-        return false;
+            return false;
+        }
     }
 }
-}
-

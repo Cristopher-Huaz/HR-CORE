@@ -115,66 +115,57 @@ public class PaymentSlipController implements Initializable {
 
     private void generatePaymentSlip() {
 
-    Person selectedEmployee =
-            tblEmployeeEdit.getSelectionModel().getSelectedItem();
+        Person selectedEmployee =
+                tblEmployeeEdit.getSelectionModel().getSelectedItem();
 
-    if (selectedEmployee == null) {
-
-        System.out.println(
-                "Debe seleccionar un empleado."
-        );
-
-        return;
-    }
-
-    String modificationText =
-            txtModifications.getText().trim();
-
-    if (modificationText.isEmpty()) {
-
-        System.out.println(
-                "Debe ingresar una modificación."
-        );
-
-        return;
-    }
-
-    try {
-
-        double modification =
-                Double.parseDouble(modificationText);
-
-        boolean updated =
-                paymentSlipDAO.updateSalary(
-                        selectedEmployee.getId(),
-                        modification
-                );
-
-        if (updated) {
-
-            System.out.println(
-                    "Salario actualizado correctamente."
-            );
-
-            // Recarga los datos directamente desde la BD
-            loadEmployees();
-
-            // Limpia los campos
-            txtModifications.clear();
-            txtObservations.clear();
-
-        } else {
-
-            System.out.println(
-                    "No se pudo actualizar el salario."
-            );
+        if (selectedEmployee == null) {
+            System.out.println("Debe seleccionar un empleado.");
+            return;
         }
 
-    } catch (NumberFormatException e) {
+        String modificationText = txtModifications.getText().trim();
+        String observationText = txtObservations.getText().trim();
 
-        System.out.println(
-                "La modificación debe ser un número válido."
-        );
+        if (modificationText.isEmpty()) {
+            System.out.println("Debe ingresar una modificación.");
+            return;
+        }
+
+        if (observationText.isEmpty()) {
+            System.out.println("Debe ingresar una observación de la modificación.");
+            return;
+        }
+
+        try {
+
+            double modification = Double.parseDouble(modificationText);
+
+            // Llamamos al nuevo método que actualiza el sueldo y guarda la observación
+            boolean updated = paymentSlipDAO.updateSalaryWithObservation(
+                    selectedEmployee.getId(),
+                    modification,
+                    observationText
+            );
+
+            if (updated) {
+
+                System.out.println("Salario actualizado y observación guardada correctamente.");
+
+                // Recarga los datos directamente desde la BD
+                loadEmployees();
+
+                // Limpia los campos
+                txtModifications.clear();
+                txtObservations.clear();
+
+            } else {
+
+                System.out.println("No se pudo actualizar el salario.");
+            }
+
+        } catch (NumberFormatException e) {
+
+            System.out.println("La modificación debe ser un número válido.");
+        }
     }
-}
 }

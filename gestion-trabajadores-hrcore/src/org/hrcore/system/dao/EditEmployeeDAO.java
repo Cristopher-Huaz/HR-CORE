@@ -11,8 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.control.Alert;
 import org.hrcore.system.config.ConnectionDB;
 import org.hrcore.system.model.Person;
+import org.hrcore.system.utils.AlertInformation;
 
 public class EditEmployeeDAO {
 
@@ -101,6 +103,7 @@ public class EditEmployeeDAO {
             System.out.println(
                     ">>> ERROR: Departamento o puesto no encontrado."
             );
+            AlertInformation.showAlert("warning", "Ingrese un departamento valido: Recursos Humanos, Tecnologia, Finanzas, Marketing o Ventas", "DEPARTAMENTO");
             return false;
         }
 
@@ -124,6 +127,7 @@ public class EditEmployeeDAO {
                 ">>> ERROR AL ACTUALIZAR EMPLEADO: "
                 + e.getMessage()
         );
+        AlertInformation.showAlert("warning", "Error al intentar actualizar al empleado", "UPDATE EMPLOYEE");
         e.printStackTrace();
         return false;
     }

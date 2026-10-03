@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import org.hrcore.system.model.Person;
+import org.hrcore.system.utils.AlertInformation;
 import org.hrcore.system.utils.SceneManager;
 import org.hrcore.system.utils.ViewFactory;
 import javafx.collections.ObservableList;
@@ -171,6 +172,8 @@ public class EditEmployeeController implements Initializable {
             System.out.println(
                     ">>> ERROR: El salario debe ser numérico."
             );
+            AlertInformation.showAlert("warning", "El valor debe ser numerico", "VALOR SALARIO");
+
         }
     }
 
